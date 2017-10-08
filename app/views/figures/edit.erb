@@ -15,13 +15,15 @@
     <input type="text" name="landmark[name]" id="new_landmark">
     <br><br>
 
-    <label>Edit Titles</label><br>
-    <% Title.all.each do |title| %>
-    <label><%= title.name %></label>
-    <input type="checkbox" name="figure[title_ids][]" value="<%= title.id %>" id="<%= title.name %>" <%='checked' if @figure.titles.include?(title) %>>
+    <label>Edit Titles:</label>
+    <% @titles.each do |title| %>
+    <%= title.name %>
+    <input type="checkbox" name="figure[title_ids][]" value="<%=title.id%>" id="title_<%=title.id%>" <%='checked' if @figure.titles.include?(title) %>>
     <% end %>
-    <label>Add New Title:</label>
-    <input type="text" id="new_title" name="title[name]"><br></br>
+    <br><br>
+      <label> Add New Title:</label>
+      <input type="text" name="title[name]" id="new_title">
+      <br><br>
 
       <input type="submit" value="Edit Figure">
     </form>
