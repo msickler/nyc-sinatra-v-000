@@ -17,9 +17,9 @@ class FiguresController < ApplicationController
  end
 
  post '/figures' do
-    @figure = Figure.new(name: params["name"])
-    @figure.landmarks = Landmark.find_or_create_by(name: params["name"])
-    @figure.figure_titles = params[:figure_title]
+    @figure = Figure.new(params[:figure])
+    @figure.titles << Title.new(name: params[:title][:name]) unless params[:title][:name].empty?
+    @figure.landmarks << Landmark.new(name: params[:landmark][:name]) unless params[:landmark][:name].empty?
     @figure.save
   end
 
