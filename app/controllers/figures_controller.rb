@@ -2,18 +2,18 @@ class FiguresController < ApplicationController
 
   get '/figures' do
     @figures = Figure.all
-    erb :'/figures/index'
+    erb :'figures/index'
   end
 
   get '/figures/new' do
     @titles = Title.all
     @landmarks = Landmark.all
-   erb :'/figures/new'
+   erb :'figures/new'
  end
 
  get '/figures/:id' do
    @figure = Figure.find_by_id(params[:id])
-   erb :'/figures/show'
+   erb :'figures/show'
  end
 
  post '/figures' do
@@ -21,6 +21,7 @@ class FiguresController < ApplicationController
     @figure.titles << Title.new(name: params[:title][:name]) unless params[:title][:name].empty?
     @figure.landmarks << Landmark.new(name: params[:landmark][:name]) unless params[:landmark][:name].empty?
     @figure.save
+    redirect "/figures/#{@figure.id}"
   end
 
   get '/figures/:id/edit' do
